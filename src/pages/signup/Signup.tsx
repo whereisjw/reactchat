@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Header, Form, Label, Input, Error, Button, Success, LinkContainer } from './styles';
 import useMutation from '../../hooks/useMutation';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface IForm {
   email: string;
@@ -72,11 +72,11 @@ const SignUp = () => {
         {errors.email && <Error>이메일을 입력하삼</Error>}
         {errors.email && <Error>비밀번호를 입력하삼</Error>}
         {error && <Error>사용중인아디임</Error>}
-        <Button type="submit">{loading ? '로딩중' : '회원가입'}</Button>
+        <Button type="submit">{loading ? '로딩중...' : '회원가입'}</Button>
       </Form>
       <LinkContainer>
         이미 회원이신가요?&nbsp;
-        <a href="/login">로그인 하러가기</a>
+        <Link to="/login">로그인 하러가기</Link>
       </LinkContainer>
     </div>
   );
