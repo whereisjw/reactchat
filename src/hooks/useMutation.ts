@@ -10,7 +10,7 @@ export default function useMutation(
   function mutation(data: any) {
     setLoading(true);
     axios
-      .post(url, data)
+      .post(url, data, { withCredentials: true })
       .then((res) => setData(res.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));

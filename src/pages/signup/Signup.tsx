@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Header, Form, Label, Input, Error, Button, Success, LinkContainer } from './styles';
+import { Header, Form, Label, Input, Error, Button, LinkContainer } from './styles';
 import useMutation from '../../hooks/useMutation';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -38,7 +38,7 @@ const SignUp = () => {
     if (data && data === 'ok') {
       alert('회원가입에 성공했습니다');
       reset();
-      /*       navigate('/login'); */
+      navigate('/login');
     }
   }, [data]);
   return (

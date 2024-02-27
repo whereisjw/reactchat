@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { Header, Form, Label, Input, Error, Button, LinkContainer } from './styles';
 import useMutation from '../../hooks/useMutation';
 import { Link } from 'react-router-dom';
+import useSWR from 'swr';
+import { fetcher } from '../../utils/fetcher';
 
 interface IForm {
   email: string;
@@ -9,17 +11,17 @@ interface IForm {
 }
 
 const Login = () => {
+  const { data: getuserInfoData } = useSWR('http://localhost:3095/api/users', fetcher);
   const {
     handleSubmit,
-    reset,
     register,
     formState: { errors },
   } = useForm<IForm>();
-  const [mutation, { loading, data, error }] = useMutation('http://localhost:3095/api/users/login');
+  const [mutation, { loading, data }] = useMutation('http://localhost:3095/api/users/login');
   const onValidFormSubmit = (data: IForm) => {
     mutation(data);
   };
-  console.log(data);
+  console.log(getuserInfoData, data);
 
   return (
     <div id="container">
@@ -28,14 +30,16 @@ const Login = () => {
         <Label id="email-label">
           <span>이메일 주소</span>
           <div>
-            <Input type="email" id="email" {...register('email')} />
+            <Input type="email" id="email" {...register('email', { required: true })} />
           </div>
         </Label>
         <Label id="password-label">
           <span>비밀번호</span>
           <div>
-            <Input type="password" id="password" {...register('password')} />
+            <Input type="password" id="password" {...register('password', { required: true })} />
           </div>
+          {errors.email && <Error>올바른 이메일을 입력하삼</Error>}
+          {errors.password && <Error>올바른 비밀번호를 입력하삼</Error>}
           {/*  {logInError && <Error>이메일과 비밀번호 조합이 일치하지 않습니다.</Error>} */}
         </Label>
         <Button type="submit">{loading ? '로딩중...' : '로그인'}</Button>
