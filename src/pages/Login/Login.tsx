@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { Header, Form, Label, Input, Error, Button, LinkContainer } from './styles';
-import useMutation from '../../hooks/useMutation';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
-import { fetcher } from '../../utils/fetcher';
+import fetcher from '../../utils/fetcher';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface IForm {
   email: string;
@@ -11,17 +12,29 @@ interface IForm {
 }
 
 const Login = () => {
-  const { data: getuserInfoData } = useSWR('http://localhost:3095/api/users', fetcher);
+  const { data: getuserInfoData, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<IForm>();
-  const [mutation, { loading, data }] = useMutation('http://localhost:3095/api/users/login');
+  const [loading, setLoading] = useState(false);
   const onValidFormSubmit = (data: IForm) => {
-    mutation(data);
+    setLoading(true);
+    axios
+      .post('http://localhost:3095/api/users/login', data, { withCredentials: true })
+      .then((res) => res.data)
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+        mutate();
+      });
   };
-  console.log(getuserInfoData, data);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getuserInfoData) navigate('/workspace/channel');
+  }, [getuserInfoData]);
 
   return (
     <div id="container">

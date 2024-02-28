@@ -42,3 +42,19 @@ yarn add @emotion/react @emotion/styled
 ```
 
 - 위 코드 붙여넣기, 팀프로젝트시 상황에 맞게 코딩컨벤션 설정해서 변경하기
+
+### gravatar 사용하기
+
+- npm install gravatar --save @types/gravatar
+
+```
+            <img src={gravatar.url('test', { s: '100', r: 'x', d: 'retro' }, true)} alt="" />
+```
+
+- default 종류(d 프로퍼티)
+- mp (mystery person): 신비한 인물의 실루엣을 표시합니다.
+- identicon: 이메일 해시를 기반으로 생성된 기하학적 패턴을 표시합니다.
+- monsterid: 이메일 해시를 기반으로 생성된 몬스터 이미지를 표시합니다.
+- wavatar: 이메일 해시를 기반으로 생성된 얼굴 이미지를 표시합니다.
+- retro: 이메일 해시를 기반으로 생성된 픽셀 아트 스타일의 얼굴 이미지를 표시합니다.
+- robohash: 이메일 해시를 기반으로 생성된 로봇 이미지를 표시합니다.

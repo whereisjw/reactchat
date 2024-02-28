@@ -13,6 +13,8 @@ interface IForm {
 
 const SignUp = () => {
   const [mutation, { loading, data, error }] = useMutation('http://localhost:3095/api/users');
+  console.log(data);
+
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -30,11 +32,8 @@ const SignUp = () => {
       nickname,
       password,
     });
-  };
+  }; //if
   useEffect(() => {
-    if (data && !error) {
-      return;
-    }
     if (data && data === 'ok') {
       alert('회원가입에 성공했습니다');
       reset();
