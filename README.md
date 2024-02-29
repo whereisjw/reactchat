@@ -58,3 +58,15 @@ yarn add @emotion/react @emotion/styled
 - wavatar: 이메일 해시를 기반으로 생성된 얼굴 이미지를 표시합니다.
 - retro: 이메일 해시를 기반으로 생성된 픽셀 아트 스타일의 얼굴 이미지를 표시합니다.
 - robohash: 이메일 해시를 기반으로 생성된 로봇 이미지를 표시합니다.
+
+# react-toastify
+
+- npm i react-toastify
+
+```
+    axios
+      .post('http://localhost:3095/api/workspaces', data)
+      .catch((err) => toast.error(err.response?.data,{position:'bottom-center'}))
+      .finally(() => reset());
+
+```

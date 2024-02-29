@@ -17,6 +17,7 @@ export const Header = styled.header`
 `;
 
 export const ProfileImg = styled.img`
+  cursor: pointer;
   width: 28px;
   height: 28px;
   /*   position: absolute; */
